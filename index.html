@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>untitled</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Reid Beels">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+    $(function() {
+      var spin_images = [ 'rotate/01.jpg',
+                          'rotate/02.jpg',
+                          'rotate/03.jpg',
+                          'rotate/04.jpg',
+                          'rotate/05.jpg',
+                          'rotate/06.jpg',
+                          'rotate/07.jpg',
+                          'rotate/08.jpg',
+                          'rotate/09.jpg',
+                          'rotate/10.jpg',
+                          'rotate/11.jpg',
+                          'rotate/12.jpg',
+                          'rotate/13.jpg']
+      var rand_images = [ 'rand/1.jpg',
+                          'rand/2.jpg',
+                          'rand/3.jpg',
+                          'rand/4.jpg',
+                          'rand/5.jpg',
+                          'rand/6.jpg',
+                          'rand/7.jpg',
+                          'rand/8.jpg',
+                          'rand/9.jpg',
+                          'rand/10.jpg',
+                          'rand/11.jpg']
+      var screen = $('#hypertext_display_screen');
+      var screen_width = screen.width();
+      var slice_width = screen_width / spin_images.length;
+
+      var scrub = function(e) {
+        var x = e.pageX - e.target.offsetLeft;
+        var slice = Math.floor(x / slice_width);
+
+        screen.attr('src', spin_images[slice]);
+      }
+
+      screen.mousemove(scrub);
+      screen.bind('touchmove', scrub);
+
+      screen.mousedown(function(e) {
+        e.preventDefault();
+        var img = rand_images[ Math.floor( Math.random() * rand_images.length ) ];
+        console.log(img);
+        screen.attr('src', img);
+      });
+    });
+	</script>
+  <style type="text/css" media="all">
+    #hypertext_display_screen {
+      width: 100%
+    }
+  </style>
+</head>
+<body>
+  <img src="rotate/13.jpg" id="hypertext_display_screen" />
+</body>
+</html>
